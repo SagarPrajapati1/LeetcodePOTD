@@ -41,25 +41,44 @@ public:
         // }
         // return root -> val;
 
-        int ans = -1;
-        q.push(root);
+        // int ans = -1;
+        // q.push(root);
         
-        while(!q.empty()){
+        // while(!q.empty()){
 
-            // it will tell when level is changed
-            int cnt = q.size();
+        //     //It will tell when the level is changed
+        //     int cnt = q.size();
 
-            for(int i = 0; i < cnt; i++){
-                TreeNode* front = q.front();
-                q.pop();
+        //     for(int i = 0; i < cnt; i++){
+        //         TreeNode* front = q.front();
+        //         q.pop();
 
-                if(i == 0) ans = front -> val;
+        //         if(i == 0) ans = front -> val;
 
-                if(front -> left) q.push(front -> left);
-                if(front -> right) q.push(front -> right);
-            }
-        }
+        //         if(front -> left) q.push(front -> left);
+        //         if(front -> right) q.push(front -> right);
+        //     }
+        // }
+        // return ans;
+
+      int curr = 1;
+        int prev = 0;
+        int ans = 0;
+        solve(root, curr, prev, ans);
         return ans;
+    }
 
+    void solve(TreeNode* root, int curr, int &prev, int &ans) {
+        if(root == nullptr) return;
+
+        //Check if the level is changed or not
+        if(curr > prev){
+            prev = curr;
+            ans = root -> val;
+        }
+
+        //Check for the next levels
+        solve(root -> left, curr + 1, prev, ans);
+        solve(root -> right, curr + 1, prev, ans);
     }
 };
