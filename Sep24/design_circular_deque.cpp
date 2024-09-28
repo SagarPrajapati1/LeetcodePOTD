@@ -9,7 +9,7 @@ public:
     bool insertFront(int value) {
         if(cnt == k) return false;
 
-        dq[front] = value;
+        dq[front] = value; // insert the value
 
         front = (front - 1 + k) % k; // get the circular index
         // increase the cnt
